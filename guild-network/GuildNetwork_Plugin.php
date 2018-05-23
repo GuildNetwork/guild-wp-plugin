@@ -143,10 +143,10 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
           $setting = $this->getOption('HandlePosts', 'protect single post per page');
           if ('protect single post per page' == $setting) {
             if (is_single($post_id)) {
-              $classes[] = 'guild-protect-post';              
+              $classes[] = 'guild-protect-post-single';              
             }
           } else if ($setting == 'protect all') {
-            $classes[] = 'guild-protect-post';
+            $classes[] = 'guild-protect-post-feed';
           }
         }    
       }
