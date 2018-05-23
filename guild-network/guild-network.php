@@ -7,7 +7,7 @@
    Author URI: https://guild.network
    Description: Integrate Guild into the site, enabling access pass purchases
    Text Domain: guild-network
-   License: GPLv3
+   License: GPLv2 or later
   */
 
 /*

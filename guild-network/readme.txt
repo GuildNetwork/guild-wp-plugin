@@ -1,26 +1,35 @@
 === Guild Network ===
 Contributors: Hivepoint, Inc.
-Donate link:
+Donate link:  https://guild.network
 Tags:
-License: GPLv3
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Requires at least: 3.5
-Tested up to: 3.5
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Requires at least: 4.0
+Tested up to: 4.9.6
 Stable tag: 0.1
 
-Integrate Guild into the site, enabling access pass purchases
+Integrate your website into the Guild network
 
 == Description ==
 
-Integrate Guild into the site, enabling access pass purchases
+This plugin enables Guild integration.  Guild is a network of websites organized by
+the folks at https://guild.network.  Once Guild is integrated into your site, your site
+will be reviewed.  Once accepted, your pages will have a "Guild stamp" added on the side
+and visitors will be prompted to purchase a Guild access pass, whose proceeds are 
+distributed to site owners based on conversions and engagement.
+
+Note that the plugin remains effectively invisible until the site is approved by Guild.
+
+The plugin adds a script tag containing your unique site code to the page header.  This 
+script handles all of the work involved in Guild integration.  Otherwise, the plugin's
+only job is to add special CSS classnames to any content that it determines (based on
+categories and/or tags) is to be treated as exclusive.
 
 == Installation ==
 
-1)  Install and activate this plugin.  
-
-2)  Visit https://guild.network and add a site.  This will give you a unique alphanumeric site code.
-
-3)  Open the options page for this plugin and enter the site code there.
+1. Install and activate this plugin.  
+2. Visit https://guild.network and add a site.  This will give you a unique alphanumeric site code.
+3. Open the settings page ("Guild Network" under Plugins) and enter the site code there.
 
 With this done, if you inspect your site pages, there should be a few new lines in the <head> section
 that loads a script from guild.network and initializes it with your site code.

@@ -15,7 +15,7 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
             //'_version' => array('Installed Version'), // Leave this one commented-out. Uncomment to test upgrades.
             'SiteCode' => array(__('Site Code', 'guild-network')),
             'HandlePages' => array(__('Exclusive page handling', 'guild-network'), 'protect', 'ignore'),
-            'HandlePosts' => array(__('Exclusive post handling', 'guild-network'), 'protect single post per page', 'protect all', 'ignore'),
+            'HandlePosts' => array(__('Exclusive post handling', 'guild-network'), 'protect all', 'protect single post per page', 'ignore'),
             'ExclusiveCategory' => array(__('Exclusive content category', 'guild-network'), 'Guild Exclusive'),
             'ExclusiveTag' => array(__('Exclusive content tag name', 'guild-network'), 'guild-exclusive'),
         );
@@ -30,7 +30,7 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
         $options = $this->getOptionMetaData();
         if (!empty($options)) {
             foreach ($options as $key => $arr) {
-                if (is_array($arr) && count($arr > 1)) {
+                if (is_array($arr) && count($arr) > 1) {
                     $this->addOption($key, $arr[1]);
                 }
             }

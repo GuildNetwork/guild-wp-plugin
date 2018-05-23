@@ -281,33 +281,6 @@ class GuildNetwork_OptionsManager {
         $settingsGroup = get_class($this) . '-settings-group';
         ?>
         <div class="wrap">
-            <!-- <h2><?php _e('System Settings', 'guild-network'); ?></h2>
-            <table cellspacing="1" cellpadding="2"><tbody>
-            <tr><td><?php _e('System', 'guild-network'); ?></td><td><?php echo php_uname(); ?></td></tr>
-            <tr><td><?php _e('PHP Version', 'guild-network'); ?></td>
-                <td><?php echo phpversion(); ?>
-                <?php
-                if (version_compare('5.2', phpversion()) > 0) {
-                    echo '&nbsp;&nbsp;&nbsp;<span style="background-color: #ffcc00;">';
-                    _e('(WARNING: This plugin may not work properly with versions earlier than PHP 5.2)', 'guild-network');
-                    echo '</span>';
-                }
-                ?>
-                </td>
-            </tr>
-            <tr><td><?php _e('MySQL Version', 'guild-network'); ?></td>
-                <td><?php echo $this->getMySqlVersion() ?>
-                    <?php
-                    echo '&nbsp;&nbsp;&nbsp;<span style="background-color: #ffcc00;">';
-                    if (version_compare('5.0', $this->getMySqlVersion()) > 0) {
-                        _e('(WARNING: This plugin may not work properly with versions earlier than MySQL 5.0)', 'guild-network');
-                    }
-                    echo '</span>';
-                    ?>
-                </td>
-            </tr>
-            </tbody></table>
- -->
             <h2><?php echo $this->getPluginDisplayName(); echo ' '; _e('Settings', 'guild-network'); ?></h2>
 
             <form method="post" action="">
@@ -348,9 +321,9 @@ class GuildNetwork_OptionsManager {
             <h4>Exclusive Content</h4>
             <p>If you have pages or posts that you want to make available only to Guild pass holders, add them to the 'Guild Exclusive' category, or
             add the 'guild-exclusive' tag to them.  (Hint: the 'Post Tags and Categories for Pages' plug-in is one easy way to manage categories and tags for your site.)</p>
-            <p>By default, an exclusive post will only be protected by this plugin when it is on a page by itself.  If you want to protect an exclusive
-            post when it is displayed within a stream of posts, change 'Exclusive post handling' above accordingly.</p>
-            <p>If you prefer to use different category or tag names for exclusive content, you can change them above.</p>
+            <p>By default, an exclusive post will be protected by this plugin wherever it appears on your site.  If your theme displays "teasers" for 
+            your exclusive posts within a feed, change the <b>Exclusive post handling</b> setting above.</p>
+            <p>If you prefer to use different category or tag names to identify exclusive content, you can change them above.</p>
         </div>
         <?php
     }
