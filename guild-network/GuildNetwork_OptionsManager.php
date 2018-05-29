@@ -317,13 +317,29 @@ class GuildNetwork_OptionsManager {
 
             <h3>Instructions</h3>
             <p>Register your site at <a href="https://guild.network" target="_blank">Guild</a> and get the site code to fill in above.</p>
-            <p>Unless you have exclusive content only for Guild pass holders, that's it!  Once your site is approved, the Guild stamp will start showing up on your pages.<p>
-            <h4>Exclusive Content</h4>
+            <p>That's it!  Once your site is approved, the Guild stamp will start showing up on your pages.<p>
+            <p>Optionally, the plugin can also manage exclusive content and ads for you.  See below.</p>
+            <h4>Exclusive Content (Optional)</h4>
             <p>If you have pages or posts that you want to make available only to Guild pass holders, add them to the 'Guild Exclusive' category, or
-            add the 'guild-exclusive' tag to them.  (Hint: the 'Post Tags and Categories for Pages' plug-in is one easy way to manage categories and tags for your site.)</p>
-            <p>By default, an exclusive post will be protected by this plugin wherever it appears on your site.  If your theme displays "teasers" for 
-            your exclusive posts within a feed, change the <b>Exclusive post handling</b> setting above.</p>
-            <p>If you prefer to use different category or tag names to identify exclusive content, you can change them above.</p>
+            add the 'guild-exclusive' tag to them.</p>
+            <p>By default, the plugin will only protect exclusive posts when they appear on a page by themselves.  
+            In this way, visitors will be able to see these posts in your feeds or grids, but when they open them 
+            will be faced with a paywall.  If you want to have exclusive posts protected even when appearing on a 
+            page along with other posts, change the 'Exclusive post handling' setting above.</p>
+            <p>If you prefer to use different category or tag names to identify exclusive content, you can change 
+            them above.</p>
+            <h4>Ad Removal (Optional)</h4>
+            <p>Visitors will be more inclined to purchase an access pass if they know that you will not show them ads 
+            when they have an access pass.</p>            
+            <p>The setting, 'Remove ads for pass holders', indicates whether you are committing to this.  If you never have 
+            ads on your site, change this to 'true' so that visitors understand the sacrifice you are making, thereby encouraging them to support you.</p>
+            <p>If you do have ads, but are willing to give them up for pass holders, set the 'Remove ads...' setting to 'true' and use 
+            the subsequent 'Ad' settings so the plugin can identify ad slots on your pages or in your posts and hide them when appropriate.</p>
+            <p>These three additional Ad settings, 'classes', 'DIV IDs', and 'tags', contain comma-separated lists 
+            of CSS classes, IDs, and tag names, respectively.  You can use any or all of these.</p>
+            <p>For example, if you set 'Remove ads...' to 'true', and 'Ad classes' to 'adsbygoogle', this will hide the 
+            contents of the tags containing AdSense ads.</p>
+            <p>You may need to view the source for your pages to determine the best way to reliably identify the ad containers.</p>
         </div>
         <?php
     }
