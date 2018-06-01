@@ -158,14 +158,12 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
       if ($post_id) {
         if ($this->isExclusive($post_id)) {
           $setting = $this->getOption('HandlePosts', 'protect single post per page');
-          if ('protect single post per page' == $setting) {
-            if (is_single($post_id)) {
-              $classes[] = 'guild-protect-post-single';              
-            }
-          } else if ($setting == 'protect everywhere') {
-            $classes[] = 'guild-protect-post-feed';
+          if ('ignore' !== $setting && is_single($post_id)) {
+            $classes[] = 'guild-protect-parent';              
+          } else if ('protect everywhere' == $setting) {
+            $classes[] = 'guild-protect';            
           }
-        }    
+        }
       }
       return $classes;
     }
