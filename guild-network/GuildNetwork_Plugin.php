@@ -18,10 +18,10 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
             'HandlePosts' => array(__('Exclusive post handling', 'guild-network'), 'protect single post per page', 'protect everywhere', 'ignore'),
             'ExclusiveCategory' => array(__('Exclusive content category', 'guild-network'), 'Guild Exclusive'),
             'ExclusiveTag' => array(__('Exclusive content tag name', 'guild-network'), 'guild-exclusive'),
-            'AdRemoval' => array(__('Remove ads for pass holders', 'guild-network'), 'false', 'true'),
             'AdClasses' => array(__('Ad classes', 'guild-network'), 'adsbygoogle'),
             'AdDivIds' => array(__('Ad DIV IDs', 'guild-network'), ''),
             'AdTags' => array(__('Ad tags', 'guild-network'), ''),
+            'GuildServerUrl' => array(__('Guild server (test-only)', 'guild-network'), ''),
         );
     }
 
@@ -124,7 +124,11 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
       $siteCode = $this->getOption('SiteCode');
       if ($siteCode) {
         echo '<!-- Guild -->';
-        echo '<script async src="https://guild.network/guild-embed.js"></script>';
+        $serverUrl = 'https://guild.network/e1/embed.js';
+        if ('' !== $this->getOption('GuildServerUrl', '')) {
+          $serverUrl = $this->getOption('GuildServerUrl');
+        }
+        echo '<script async src="' . $serverUrl . '"></script>';
         echo '<script>';
         echo '  window.guild = { ';
         echo 'site: \'' . $siteCode . '\', ';
@@ -134,17 +138,14 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
             echo 'exclusive: true, ';
           }
         } 
-        if ('true' == $this->getOption('AdRemoval')) {
-          echo 'adRemoval:  true, ';
-          if ('' !== $this->getOption('AdClasses', '')) {
-            echo 'adClasses: \'' . $this->getOption('AdClasses', '') . '\', ';
-          }
-          if ('' !== $this->getOption('AdDivIds', '')) {
-            echo 'adDivIds: \'' . $this->getOption('AdDivIds', '') . '\', ';
-          }
-          if ('' !== $this->getOption('AdDivIds', '')) {
-            echo 'adTags: \'' . $this->getOption('AdTags', '') . '\', ';
-          }
+        if ('' !== $this->getOption('AdClasses', '')) {
+          echo 'adClasses: \'' . $this->getOption('AdClasses', '') . '\', ';
+        }
+        if ('' !== $this->getOption('AdDivIds', '')) {
+          echo 'adDivIds: \'' . $this->getOption('AdDivIds', '') . '\', ';
+        }
+        if ('' !== $this->getOption('AdDivIds', '')) {
+          echo 'adTags: \'' . $this->getOption('AdTags', '') . '\', ';
         }
         echo ' };';
         echo '</script>';  

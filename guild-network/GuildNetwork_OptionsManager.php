@@ -319,7 +319,7 @@ class GuildNetwork_OptionsManager {
             <p>Register your site at <a href="https://guild.network" target="_blank">Guild</a> and get the site code to fill in above.</p>
             <p>That's it!  Once your site is approved, the Guild stamp will start showing up on your pages.<p>
             <p>Optionally, the plugin can also manage exclusive content and ads for you.  See below.</p>
-            <h4>Exclusive Content (Optional)</h4>
+            <h4>Exclusive Content</h4>
             <p>If you have pages or posts that you want to make available only to Guild pass holders, add them to the 'Guild Exclusive' category, or
             add the 'guild-exclusive' tag to them.</p>
             <p>By default, the plugin will only protect exclusive posts when they appear on a page by themselves.  
@@ -328,18 +328,19 @@ class GuildNetwork_OptionsManager {
             page along with other posts, change the 'Exclusive post handling' setting above.</p>
             <p>If you prefer to use different category or tag names to identify exclusive content, you can change 
             them above.</p>
-            <h4>Ad Removal (Optional)</h4>
+            <h4>Ad Removal</h4>
             <p>Visitors will be more inclined to purchase an access pass if they know that you will not show them ads 
             when they have an access pass.</p>            
-            <p>The setting, 'Remove ads for pass holders', indicates whether you are committing to this.  If you never have 
-            ads on your site, change this to 'true' so that visitors understand the sacrifice you are making, thereby encouraging them to support you.</p>
-            <p>If you do have ads, but are willing to give them up for pass holders, set the 'Remove ads...' setting to 'true' and use 
-            the subsequent 'Ad' settings so the plugin can identify ad slots on your pages or in your posts and hide them when appropriate.</p>
-            <p>These three additional Ad settings, 'classes', 'DIV IDs', and 'tags', contain comma-separated lists 
-            of CSS classes, IDs, and tag names, respectively.  You can use any or all of these.</p>
-            <p>For example, if you set 'Remove ads...' to 'true', and 'Ad classes' to 'adsbygoogle', this will hide the 
-            contents of the tags containing AdSense ads.</p>
-            <p>You may need to view the source for your pages to determine the best way to reliably identify the ad containers.</p>
+            <p>If you do not have ads on your site, you have nothing to do.  But if you want to retain ads for those without an
+            access pass, then you need to take action to remove those ads when the visitor has an access pass.  The 
+            plugin will do this automatically for you if you identify the ad containers on your page.</p>
+            <p>The three Ad settings, 'classes', 'DIV IDs', and 'tags', contain comma-separated lists 
+            of CSS classes, IDs, and tag names, respectively, identifying ad containers.  You can use any or all of these.</p>
+            <p>For example, with 'Ad classes' set to 'adsbygoogle', the plugin will hide the 
+            contents of the tags with this CSS class, and therefore those containing AdSense ads -- but only if the visitor 
+            has an access pass.</p>
+            <p>Depending on the ad network that you are using, you may need to view the source for your pages to determine 
+            the best way to reliably identify the ad containers.</p>
         </div>
         <?php
     }
