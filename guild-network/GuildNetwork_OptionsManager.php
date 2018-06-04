@@ -318,7 +318,14 @@ class GuildNetwork_OptionsManager {
             <h3>Instructions</h3>
             <p>Register your site at <a href="https://guild.network" target="_blank">Guild</a> and get the site code to fill in above.</p>
             <p>That's it!  Once your site is approved, the Guild stamp will start showing up on your pages.<p>
-            <p>Optionally, the plugin can also manage exclusive content and ads for you.  See below.</p>
+            <p>Optionally, you can control more about how the plugin behaves.  See below.</p>
+            <h4>Appearance</h4>
+            <p>Control the color of the Guild stamp on your page using the <b>theme</b> setting.  If your page has a dark background, you
+            may want to change the theme to "light".</p>
+            <p>By default, the Guild stamp will appear 80 pixels below the top-right corner of your page.  Depending on what appears on the
+            top of your pages, you may want to change this value.</p>
+            <p>By default, the Guild stamp is placed as an overlay of your page content with a <b>z-index</b> of 10.  You can override this value
+            if necessary to keep the Guild stamp visible when appropriate.</p>
             <h4>Exclusive Content</h4>
             <p>If you have pages or posts that you want to make available only to Guild pass holders, add them to the 'Guild Exclusive' category, or
             add the 'guild-exclusive' tag to them.</p>
@@ -327,14 +334,14 @@ class GuildNetwork_OptionsManager {
             will be faced with a paywall.  If you want to have exclusive posts protected even when appearing on a 
             page along with other posts, change the 'Exclusive post handling' setting above.</p>
             <p>If you prefer to use different category or tag names to identify exclusive content, you can change 
-            them above.</p>
+            them in the settings above.</p>
             <h4>Ad Removal</h4>
             <p>Visitors will be more inclined to purchase an access pass if they know that you will not show them ads 
             when they have an access pass.</p>            
             <p>If you do not have ads on your site, you have nothing to do.  But if you want to retain ads for those without an
             access pass, then you need to take action to remove those ads when the visitor has an access pass.  The 
             plugin will do this automatically for you if you identify the ad containers on your page.</p>
-            <p>The three Ad settings, 'classes', 'DIV IDs', and 'tags', contain comma-separated lists 
+            <p>The three Ad settings, 'classes', 'IDs', and 'tags', contain comma-separated lists 
             of CSS classes, IDs, and tag names, respectively, identifying ad containers.  You can use any or all of these.</p>
             <p>For example, with 'Ad classes' set to 'adsbygoogle', the plugin will hide the 
             contents of the tags with this CSS class, and therefore those containing AdSense ads -- but only if the visitor 

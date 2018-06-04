@@ -14,12 +14,15 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
         return array(
             //'_version' => array('Installed Version'), // Leave this one commented-out. Uncomment to test upgrades.
             'SiteCode' => array(__('Site Code', 'guild-network')),
+            'Theme' => array(__('Theme', 'guild-network'), 'dark', 'light'),
+            'TabVerticalOffset' => array(__('Tab offset', 'guild-network'), '80'),
+            'TabZIndex' => array(__('Tab z-index', 'guild-network'), '10'),
             'HandlePages' => array(__('Exclusive page handling', 'guild-network'), 'protect', 'ignore'),
             'HandlePosts' => array(__('Exclusive post handling', 'guild-network'), 'protect single post per page', 'protect everywhere', 'ignore'),
             'ExclusiveCategory' => array(__('Exclusive content category', 'guild-network'), 'Guild Exclusive'),
             'ExclusiveTag' => array(__('Exclusive content tag name', 'guild-network'), 'guild-exclusive'),
             'AdClasses' => array(__('Ad classes', 'guild-network'), 'adsbygoogle'),
-            'AdDivIds' => array(__('Ad DIV IDs', 'guild-network'), ''),
+            'AdIds' => array(__('Ad IDs', 'guild-network'), ''),
             'AdTags' => array(__('Ad tags', 'guild-network'), ''),
             'GuildServerUrl' => array(__('Guild server (test-only)', 'guild-network'), ''),
         );
@@ -138,13 +141,22 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
             echo 'exclusive: true, ';
           }
         } 
+        if ('dark' !== $this->getOption('Theme', '')) {
+          echo 'theme: \'' . $this->getOption('Theme', '') . '\', ';
+        }
+        if ('80' !== $this->getOption('TabVerticalOffset', '')) {
+          echo 'tabVerticalOffset: \'' . $this->getOption('TabVerticalOffset', '') . '\', ';
+        }
+        if ('10' !== $this->getOption('TabZIndex', '')) {
+          echo 'tabZIndex: \'' . $this->getOption('TabZIndex', '') . '\', ';
+        }
         if ('' !== $this->getOption('AdClasses', '')) {
           echo 'adClasses: \'' . $this->getOption('AdClasses', '') . '\', ';
         }
         if ('' !== $this->getOption('AdDivIds', '')) {
-          echo 'adDivIds: \'' . $this->getOption('AdDivIds', '') . '\', ';
+          echo 'adIds: \'' . $this->getOption('AdIds', '') . '\', ';
         }
-        if ('' !== $this->getOption('AdDivIds', '')) {
+        if ('' !== $this->getOption('AdTags', '')) {
           echo 'adTags: \'' . $this->getOption('AdTags', '') . '\', ';
         }
         echo ' };';
