@@ -124,9 +124,10 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
     }
 
     public function addGuildPageHeader() {
+      global $page;
+
       $siteCode = $this->getOption('SiteCode');
       if ($siteCode) {
-        echo '<!-- Guild -->';
         $serverUrl = 'https://guild.network/e1/embed.js';
         if ('' !== $this->getOption('GuildServerUrl', '')) {
           $serverUrl = $this->getOption('GuildServerUrl');
@@ -135,8 +136,7 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
         echo '<script>';
         echo '  window.guild = { ';
         echo 'site: \'' . $siteCode . '\', ';
-        $page_id = get_queried_object_id();
-        if ($this->isExclusive($page_id)) {
+        if (is_page() && $this->isExclusive($page)) {
           if ('protect' == $this->getOption('HandlePages', 'protect')) {
             echo 'exclusive: true, ';
           }
@@ -150,18 +150,27 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
         if ('10' !== $this->getOption('TabZIndex', '')) {
           echo 'tabZIndex: \'' . $this->getOption('TabZIndex', '') . '\', ';
         }
-        if ('' !== $this->getOption('AdClasses', '')) {
-          echo 'adClasses: \'' . $this->getOption('AdClasses', '') . '\', ';
+        if (!empty(trim($this->getOption('AdClasses', '')))) {
+          echo 'adClasses: \'' . trim($this->getOption('AdClasses', '')) . '\', ';
         }
-        if ('' !== $this->getOption('AdDivIds', '')) {
-          echo 'adIds: \'' . $this->getOption('AdIds', '') . '\', ';
+        if (!empty(trim($this->getOption('AdDivIds', '')))) {
+          echo 'adIds: \'' . trim($this->getOption('AdIds', '')) . '\', ';
         }
-        if ('' !== $this->getOption('AdTags', '')) {
-          echo 'adTags: \'' . $this->getOption('AdTags', '') . '\', ';
+        if (!empty(trim($this->getOption('AdTags', '')))) {
+          echo 'adTags: \'' . trim($this->getOption('AdTags', '')) . '\', ';
         }
         echo ' };';
         echo '</script>';  
       }
+    }
+
+    private function get_top_parent_page_id() { 
+      global $post; 
+      if ($post->ancestors) { 
+        return end($post->ancestors); 
+      } else { 
+        return null; 
+      } 
     }
 
     public function addGuildPostClass($classes) {
@@ -181,6 +190,9 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
     }
 
     private function isExclusive($id) {
+      if (!id) {
+        return false;
+      }
       $exclusiveCategory = $this->getOption('ExclusiveCategory', '');
       $exclusiveTag = $this->getOption('ExclusiveTag', '');
       return in_category($exclusiveCategory, $id) || has_tag($exclusiveTag, $id);
