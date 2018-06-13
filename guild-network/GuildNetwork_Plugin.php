@@ -24,7 +24,7 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
             'AdClasses' => array(__('Ad classes', 'guild-network'), 'adsbygoogle'),
             'AdIds' => array(__('Ad IDs', 'guild-network'), ''),
             'AdTags' => array(__('Ad tags', 'guild-network'), ''),
-            'GuildServerUrl' => array(__('Guild server (test-only)', 'guild-network'), ''),
+            // 'GuildServerUrl' => array(__('Guild server (test-only)', 'guild-network'), ''),
         );
     }
 

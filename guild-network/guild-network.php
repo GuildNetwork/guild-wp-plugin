@@ -1,8 +1,8 @@
 <?php
 /*
    Plugin Name: Guild Network
-   Plugin URI: http://wordpress.org/extend/plugins/guild-network/
-   Version: 0.1
+   Plugin URI: https://guild.network/getting-started
+   Version: 0.2
    Author: Hivepoint, Inc.
    Author URI: https://guild.network
    Description: Integrate Guild into the site, enabling access pass purchases
