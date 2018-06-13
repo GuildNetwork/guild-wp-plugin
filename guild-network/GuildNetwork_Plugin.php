@@ -132,7 +132,7 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
         if ('' !== $this->getOption('GuildServerUrl', '')) {
           $serverUrl = $this->getOption('GuildServerUrl');
         }
-        echo '<script async src="' . $serverUrl . '"></script>';
+        echo '<script src="' . $serverUrl . '"></script>';
         echo '<script>';
         echo '  window.guild = { ';
         echo 'site: \'' . $siteCode . '\', ';
