@@ -174,17 +174,23 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
     }
 
     public function addGuildPostClass($classes) {
-      $this->guildLog("Checking post classes");
-      $post_id = get_queried_object_id();
-      if ($post_id) {
-        if ($this->isExclusive($post_id)) {
+      global $post;
+      if ($post) {
+        $postId = $post->ID;
+        if ($this->isExclusive($postId)) {
           $setting = $this->getOption('HandlePosts', 'protect single post per page');
-          if ('ignore' !== $setting && is_single($post_id)) {
+          if ('ignore' !== $setting && is_single($postId)) {
             $classes[] = 'guild-protect-parent';              
           } else if ('protect everywhere' == $setting) {
             $classes[] = 'guild-protect';            
+          } else {
+            $classes[] = 'guild-not-protect';            
           }
+        } else {
+          $classes[] = 'guild-not-exclusive';            
         }
+      } else {
+        $classes[] = 'guild-no-post';            
       }
       return $classes;
     }
