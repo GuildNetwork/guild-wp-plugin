@@ -153,7 +153,7 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
         if (!empty(trim($this->getOption('AdClasses', '')))) {
           echo 'adClasses: \'' . trim($this->getOption('AdClasses', '')) . '\', ';
         }
-        if (!empty(trim($this->getOption('AdDivIds', '')))) {
+        if (!empty(trim($this->getOption('AdIds', '')))) {
           echo 'adIds: \'' . trim($this->getOption('AdIds', '')) . '\', ';
         }
         if (!empty(trim($this->getOption('AdTags', '')))) {
