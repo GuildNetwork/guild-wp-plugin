@@ -70,7 +70,7 @@ class GuildNetwork_LifeCycle extends GuildNetwork_InstallIndicator {
      */
     public function deactivate() {
       $this->guildLog("Deactivating");
-      $this->uninstall();
+      // $this->uninstall();
     }
 
     /**
