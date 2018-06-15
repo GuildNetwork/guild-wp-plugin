@@ -2,10 +2,10 @@
 /*
    Plugin Name: Guild Network
    Plugin URI: https://guild.network/getting-started
-   Version: 0.2
+   Version: 0.2.1
    Author: Hivepoint, Inc.
    Author URI: https://guild.network
-   Description: Integrate Guild into the site, enabling access pass purchases
+   Description: Integrate Guild into your site, enabling access pass purchases.  Go to Guild Network under the Settings menu.
    Text Domain: guild-network
    License: GPLv2 or later
   */
