@@ -1,14 +1,14 @@
 === Guild Network ===
-Contributors: Hivepoint, Inc.
+Contributors: kduffie
 Donate link:  https://guild.network
 Tags:
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 4.0
 Tested up to: 4.9.6
-Stable tag: 0.2.1
+Stable tag: 0.2.2
 
-Integrate your website into the Guild network
+Integrate your website into the [Guild](https://guild.network) network
 
 == Description ==
 
@@ -43,9 +43,14 @@ of visitors that you configured for your site at guild.network)  and you will be
 
 
 == Screenshots ==
-
+ 1. Guild adds a small "stamp" to the side of your site's pages
+ 2. When opened, the Guild tab invites visitors to activate an access pass
+ 3. After activating the plugin, configure the Guild site code and customize using Guild Network under Settings
 
 == Changelog ==
 
-= 0.1 =
+= 0.2.1 =
 - Initial Revision
+
+= 0.2.2 =
+- Added wordpress.org assets (banner, icon, screenshots)

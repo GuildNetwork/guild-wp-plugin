@@ -159,8 +159,77 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
         if (!empty(trim($this->getOption('AdTags', '')))) {
           echo 'adTags: \'' . trim($this->getOption('AdTags', '')) . '\', ';
         }
+        $found = false;
+        if (!empty(trim($this->getOption('ExclusiveCategory', '')))) {
+          $category_id = get_cat_ID($this->getOption('ExclusiveCategory', ''));
+          $category_link = get_category_link( $category_id ); 
+          $postsByCat = $this->getPostTitlesByCategory($category_id);
+          if (!empty($category_link) && count($postsByCat) > 0) {
+            $found = true;
+            echo 'exclusivePageUrl: \'' . $category_link . '\', ';
+            $this->echoExclusiveTitles($postsByCat);
+          } 
+        } 
+        if (!$found && !empty(trim($this->getOption('ExclusiveTag', '')))) {
+          $tag_id = $this->get_tag_ID(trim($this->getOption('ExclusiveTag', '')));
+          if (!empty($tag_id)) {
+            $tag_link = get_tag_link($tag_id);
+            $postsByTag = $this->getPostTitlesByTag($tag_id);
+            if (!empty($tag_link) && count($postsByTag) > 0) {
+              echo 'exclusivePageUrl: \'' . $tag_link . '\', ';
+              $this->echoExclusiveTitles($postsByTag);
+            }
+          }
+        }
         echo ' };';
         echo '</script>';  
+      }
+    }
+
+    private function getPostTitlesByCategory($categoryId) {
+      $args = array(
+        'posts_per_page'   => 3,
+        'category'         => $categoryId,
+        'orderby'          => 'date',
+        'order'            => 'DESC'
+      );
+      $posts = get_posts($args);
+      $result = array();
+      foreach ($posts as $post) {
+        $result[] = get_the_title($post->ID);
+      }
+      return $result;
+    }
+
+    private function getPostTitlesByTag($tagId) {
+      $args = array(
+        'posts_per_page'   => 3,
+        'tag_id'           => $tagId,
+        'orderby'          => 'date',
+        'order'            => 'DESC'
+      );
+      $posts = get_posts($args);
+      $result = array();
+      foreach ($posts as $post) {
+        $result[] = get_the_title($post->ID);
+      }
+      return $result;
+    }
+
+    private function echoExclusiveTitles($titles) {
+      echo 'exclusiveTitles: [';
+      foreach ($titles as $title) {
+        echo '\'' . $title . '\', ';
+      }
+      echo ']';
+    }
+
+    private function get_tag_ID($tag_name) {
+      $tag = get_term_by('name', $tag_name, 'post_tag');
+      if ($tag) {
+        return $tag->term_id;
+      } else {
+        return 0;
       }
     }
 
