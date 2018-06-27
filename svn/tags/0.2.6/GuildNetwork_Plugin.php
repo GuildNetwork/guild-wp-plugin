@@ -212,7 +212,7 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
       global $post;
       if ($post) {
         $postId = $post->ID;
-        if ((is_page() || $post->post_type == 'page') && $this->isExclusive($page)) {
+        if (is_page() && $this->isExclusive($page)) {
           if ('protect' == $this->getOption('HandlePages', 'protect')) {
             echo '<meta name="guild-exclusive" content="page" />' . "\n";
           }
@@ -230,19 +230,12 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
         if ('' !== $this->getOption('GuildServerUrl', '')) {
           $serverUrl = $this->getOption('GuildServerUrl');
         }
-        echo "\n" . '<script defer src="' . $serverUrl . '"></script>' . "\n";
+        echo '<script defer src="' . $serverUrl . '"></script>';
         echo '<script>';
         echo '  window.guild = { ';
         echo 'site: \'' . $siteCode . '\', ';
-        // echo 'isPage: ' . (is_page() ? 'true' : 'false') . ', ';
-        // echo 'pageId: ' . (empty($page) || empty($page->ID) ? '\'none\'' : $page->ID) . ', ';
-        // echo 'postId: ' . (empty($post) ? 'none' : $post->ID) . ', ';
-        if ((is_page() || $post->post_type == 'page')) {
-          if ($page && $page->ID) {
+        if (is_page($page)) {
             echo 'exclusive: ' . ($this->isExclusive($page) ? 'true' : 'false') . ', ';
-          } else if ($post) {
-            echo 'exclusive: ' . ($this->isExclusive($post) ? 'true' : 'false') . ', ';
-          } 
         } 
         // if ('dark' !== $this->getOption('Theme', '')) {
         //   echo 'theme: \'' . $this->getOption('Theme', '') . '\', ';
@@ -285,7 +278,7 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
           }
         }
         echo ' };';
-        echo '</script>' . "\n";  
+        echo '</script>';  
       }
     }
 

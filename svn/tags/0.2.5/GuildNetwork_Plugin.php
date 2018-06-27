@@ -125,12 +125,6 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
         add_action( 'init', array(&$this, 'add_taxonomies_to_pages'));
 
         add_action( 'the_post', array(&$this, 'onPost'));
-
-        add_filter( 'excerpt_length', array(&$this, 'customExcerptLength'), 499);
-    }
-
-    public function customExcerptLength($length) {
-      return 50;
     }
 
     public function add_taxonomies_to_pages() {
@@ -151,17 +145,13 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
           if (is_single()) {
             echo '<div class="guild-ex-banner"></div>';
           }
-          $snippet = '<div class="guild-no-pass" style="display:none;margin-bottom:250px;"><h1 class="guild-snippet-title">' . get_the_title() . '</h1>' . "\n";
-          $excerpt = $post->post_excerpt;
-          if (empty($excerpt)) {
-            $excerpt = wp_trim_words($post->post_content, 55, '...');
+          $snippet = '<div class="guild-no-pass" style="display:none;"><h1 class="guild-snippet-title">' . get_the_title() . '</h1>' . "\n";
+          if (has_excerpt($postId)) {
+            $snippet = $snippet . '<p>' . get_the_excerpt() . '</p>' . "\n";
           }
-          if (!empty($excerpt)) {
-            $snippet = $snippet . '<p>' . $excerpt. '</p>' . "\n";
-          }
-          $imageUrl = $this->getPostImage($post);
-          if (!empty($imageUrl)) {
-            $snippet = $snippet . '<div class="guild-snippet-image" style="height:250px;background:linear-gradient(rgba(255,255,255,0.0), rgba(255,255,255,0.01),rgba(255,255,255,0.03),rgba(255,255,255,0.06),rgba(255,255,255,0.2),rgba(255,255,255,0.3),rgba(255,255,255,0.4),rgba(255,255,255,0.5),rgba(255,255,255,0.6),rgba(255,255,255,0.65),rgba(255,255,255,0.7),rgba(255,255,255,0.8),rgba(255,255,255,0.85),rgba(255,255,255,0.9),rgba(255,255,255,0.95),rgba(255,255,255,1)),url(' . $imageUrl . '); background-size: cover;)"></div>';  
+          if (has_post_thumbnail($postId)) {
+            $images = wp_get_attachment_image_src(get_post_thumbnail_id($postId), 'single-post-thumbnail');
+            $snippet = $snippet . '<div class="guild-snippet-image" style="height:250px;background:linear-gradient(rgba(255,255,255,0.0),rgba(255,255,255,0.33),rgba(255,255,255,1)),url(' . $images[0] . '); background-size: cover;)"></div>';  
           }
           $snippet = $snippet . '</div>' . "\n";
           $setting = $this->getOption('HandlePosts', 'protect single post per page');
@@ -174,35 +164,6 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
       }
     }
 
-   
-  /* determine whether post has a featured image, if not, find the first image inside the post content, $size passes the thumbnail size, $url determines whether to return a URL or a full image tag*/
-  /* adapted from http://www.amberweinberg.com/wordpress-find-featured-image-or-first-image-in-post-find-dimensions-id-by-url/ */
-   
-  public function getPostImage($post) {
-    ob_start();
-    ob_end_clean();
-  
-    /*If there's a featured image, show it*/
-  
-    if (has_post_thumbnail($post)) {
-      $images = wp_get_attachment_image_src(get_post_thumbnail_id($post), 'single-post-thumbnail');
-      return $images[0];
-    } else {
-      $content = $post->post_content;                
-      $first_img = '';
-      $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches);
-      $first_img = $matches[1][0];
-
-        /*No featured image, so we get the first image inside the post content*/
-  
-      if ($first_img) {
-        return $first_img;
-      } else {
-        return null;
-      }
-    }
-  }
-
     // public function onLoopEnd() {
     //   remove_action( 'the_post', array(&$this, 'onLoopEnd') ); 
     // }
@@ -212,11 +173,11 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
       global $post;
       if ($post) {
         $postId = $post->ID;
-        if ((is_page() || $post->post_type == 'page') && $this->isExclusive($page)) {
+        if (is_page() && $this->isExclusive($page)) {
           if ('protect' == $this->getOption('HandlePages', 'protect')) {
             echo '<meta name="guild-exclusive" content="page" />' . "\n";
           }
-        } else if ($this->isExclusive($postId)) {
+        }  else if ($this->isExclusive($postId)) {
           $setting = $this->getOption('HandlePosts', 'protect single post per page');
           if ('ignore' !== $setting && is_single($postId)) {
             echo '<meta name="guild-exclusive" content="post" />' . "\n";
@@ -230,19 +191,14 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
         if ('' !== $this->getOption('GuildServerUrl', '')) {
           $serverUrl = $this->getOption('GuildServerUrl');
         }
-        echo "\n" . '<script defer src="' . $serverUrl . '"></script>' . "\n";
+        echo '<script defer src="' . $serverUrl . '"></script>';
         echo '<script>';
         echo '  window.guild = { ';
         echo 'site: \'' . $siteCode . '\', ';
-        // echo 'isPage: ' . (is_page() ? 'true' : 'false') . ', ';
-        // echo 'pageId: ' . (empty($page) || empty($page->ID) ? '\'none\'' : $page->ID) . ', ';
-        // echo 'postId: ' . (empty($post) ? 'none' : $post->ID) . ', ';
-        if ((is_page() || $post->post_type == 'page')) {
-          if ($page && $page->ID) {
-            echo 'exclusive: ' . ($this->isExclusive($page) ? 'true' : 'false') . ', ';
-          } else if ($post) {
-            echo 'exclusive: ' . ($this->isExclusive($post) ? 'true' : 'false') . ', ';
-          } 
+        if (is_page() && $this->isExclusive($page)) {
+          if ('protect' == $this->getOption('HandlePages', 'protect')) {
+            echo 'exclusive: true, ';
+          }
         } 
         // if ('dark' !== $this->getOption('Theme', '')) {
         //   echo 'theme: \'' . $this->getOption('Theme', '') . '\', ';
@@ -285,7 +241,7 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
           }
         }
         echo ' };';
-        echo '</script>' . "\n";  
+        echo '</script>';  
       }
     }
 

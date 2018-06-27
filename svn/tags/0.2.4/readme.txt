@@ -6,7 +6,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 4.0
 Tested up to: 4.9.6
-Stable tag: 0.2.7
+Stable tag: 0.2.4
 
 Integrate your website into the [Guild](https://guild.network) network:  a paywall that you share with other sites.
 
@@ -50,10 +50,3 @@ With this done, if you inspect your site pages, there should be a few new lines 
 
 = 0.2.3 =
 - Documentation cleanup
-
-= 0.2.4 =
-- Removed settings now configured via guild.network
-- New "exclusive content" banner
-
-= 0.2.5 =
-- Fixed bug with extraneous banners
