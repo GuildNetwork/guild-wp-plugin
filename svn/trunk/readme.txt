@@ -63,3 +63,6 @@ With this done, if you inspect your site pages, there should be a few new lines 
 
 = 0.2.9 =
 - Add Settings link to plugin actions
+
+= 0.2.10 =
+- Fix bug in way filters were added for adding plugin links
