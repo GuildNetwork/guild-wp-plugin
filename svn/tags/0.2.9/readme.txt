@@ -5,8 +5,8 @@ Tags:
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 4.0
-Tested up to: 4.9.7
-Stable tag: 0.2.10
+Tested up to: 4.9.6
+Stable tag: 0.2.9
 
 Integrate your website into the [Guild](https://guild.network) network:  a paywall that you share with other sites.
 
@@ -60,6 +60,3 @@ With this done, if you inspect your site pages, there should be a few new lines 
 
 = 0.2.8 =
 - Add page headers to help with crawling
-
-= 0.2.9 =
-- Add Settings link to plugin actions

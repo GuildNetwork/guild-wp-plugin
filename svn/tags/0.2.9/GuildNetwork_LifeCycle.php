@@ -203,7 +203,7 @@ class GuildNetwork_LifeCycle extends GuildNetwork_InstallIndicator {
       $trace=debug_backtrace();
       $name = ( '' == $name ) ? $trace[1]['function'] : $name;
       $msg = print_r( $msg, true );
-      $log = "Guild: " . $name . "  |  " . $msg;
+      $log = "Guild: " . $name . "  |  " . $msg . "\n";
       error_log( $log );
   }
 

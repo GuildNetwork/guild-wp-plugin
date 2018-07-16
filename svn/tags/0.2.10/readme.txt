@@ -60,6 +60,3 @@ With this done, if you inspect your site pages, there should be a few new lines 
 
 = 0.2.8 =
 - Add page headers to help with crawling
-
-= 0.2.9 =
-- Add Settings link to plugin actions

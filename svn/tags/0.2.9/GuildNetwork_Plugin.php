@@ -129,7 +129,7 @@ class GuildNetwork_Plugin extends GuildNetwork_LifeCycle {
         add_filter( 'excerpt_length', array(&$this, 'customExcerptLength'), 499);
 
         $prefix = is_network_admin() ? 'network_admin_' : '';
-        $plugin_file =  plugin_basename($this->getPluginDir() . DIRECTORY_SEPARATOR . $this->getMainPluginFileName()); //plugin_basename( $this->getMainPluginFileName() );
+        $plugin_file =  'guild-network/guild-network.php'; // $this->getPluginDir() . DIRECTORY_SEPARATOR . $this->getMainPluginFileName(); //plugin_basename( __FILE__ );
         $this->guildLog('Adding filter ' . "{$prefix}plugin_action_links_{$plugin_file}");
         add_filter( "{$prefix}plugin_action_links_{$plugin_file}", array(&$this, 'onActionLinks'));
     }
