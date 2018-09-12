@@ -1,30 +1,31 @@
 <?php
 /*
-    "WordPress Plugin Template" Copyright (C) 2018 Michael Simpson  (email : michael.d.simpson@gmail.com)
+"WordPress Plugin Template" Copyright (C) 2018 Michael Simpson  (email : michael.d.simpson@gmail.com)
 
-    This file is part of WordPress Plugin Template for WordPress.
+This file is part of WordPress Plugin Template for WordPress.
 
-    WordPress Plugin Template is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+WordPress Plugin Template is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-    WordPress Plugin Template is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+WordPress Plugin Template is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Contact Form to Database Extension.
-    If not, see http://www.gnu.org/licenses/gpl-3.0.html
-*/
+You should have received a copy of the GNU General Public License
+along with Contact Form to Database Extension.
+If not, see http://www.gnu.org/licenses/gpl-3.0.html
+ */
 
-class GuildNetwork_OptionsManager {
+class GuildNetwork_OptionsManager
+{
 
-    public function getOptionNamePrefix() {
+    public function getOptionNamePrefix()
+    {
         return get_class($this) . '_';
     }
-
 
     /**
      * Define your options meta data here as an array, where each element in the array
@@ -42,14 +43,16 @@ class GuildNetwork_OptionsManager {
      *       'CanDoOperationX' => array('Can do Operation X', 'Administrator', 'Editor', 'Author', 'Contributor', 'Subscriber'),
      *       'Rating:', 'Excellent', 'Good', 'Fair', 'Poor')
      */
-    public function getOptionMetaData() {
+    public function getOptionMetaData()
+    {
         return array();
     }
 
     /**
      * @return array of string name of options
      */
-    public function getOptionNames() {
+    public function getOptionNames()
+    {
         return array_keys($this->getOptionMetaData());
     }
 
@@ -57,14 +60,16 @@ class GuildNetwork_OptionsManager {
      * Override this method to initialize options to default values and save to the database with add_option
      * @return void
      */
-    protected function initOptions() {
+    protected function initOptions()
+    {
     }
 
     /**
      * Cleanup: remove all options from the DB
      * @return void
      */
-    protected function deleteSavedOptions() {
+    protected function deleteSavedOptions()
+    {
         $optionMetaData = $this->getOptionMetaData();
         if (is_array($optionMetaData)) {
             foreach ($optionMetaData as $aOptionKey => $aOptionMeta) {
@@ -78,7 +83,8 @@ class GuildNetwork_OptionsManager {
      * @return string display name of the plugin to show as a name/title in HTML.
      * Just returns the class name. Override this method to return something more readable
      */
-    public function getPluginDisplayName() {
+    public function getPluginDisplayName()
+    {
         return get_class($this);
     }
 
@@ -88,7 +94,8 @@ class GuildNetwork_OptionsManager {
      * @param  $name string option name to prefix. Defined in settings.php and set as keys of $this->optionMetaData
      * @return string
      */
-    public function prefix($name) {
+    public function prefix($name)
+    {
         $optionNamePrefix = $this->getOptionNamePrefix();
         if (strpos($name, $optionNamePrefix) === 0) { // 0 but not false
             return $name; // already prefixed
@@ -102,7 +109,8 @@ class GuildNetwork_OptionsManager {
      * @param  $name string
      * @return string $optionName without the prefix.
      */
-    public function &unPrefix($name) {
+    public function &unPrefix($name)
+    {
         $optionNamePrefix = $this->getOptionNamePrefix();
         if (strpos($name, $optionNamePrefix) === 0) {
             return substr($name, strlen($optionNamePrefix));
@@ -118,7 +126,8 @@ class GuildNetwork_OptionsManager {
      * @return string the value from delegated call to get_option(), or optional default value
      * if option is not set.
      */
-    public function getOption($optionName, $default = null) {
+    public function getOption($optionName, $default = null)
+    {
         $prefixedOptionName = $this->prefix($optionName); // how it is stored in DB
         $retVal = get_option($prefixedOptionName);
         if (!$retVal && $default) {
@@ -133,7 +142,8 @@ class GuildNetwork_OptionsManager {
      * @param  $optionName string defined in settings.php and set as keys of $this->optionMetaData
      * @return bool from delegated call to delete_option()
      */
-    public function deleteOption($optionName) {
+    public function deleteOption($optionName)
+    {
         $prefixedOptionName = $this->prefix($optionName); // how it is stored in DB
         return delete_option($prefixedOptionName);
     }
@@ -145,7 +155,8 @@ class GuildNetwork_OptionsManager {
      * @param  $value mixed the new value
      * @return null from delegated call to delete_option()
      */
-    public function addOption($optionName, $value) {
+    public function addOption($optionName, $value)
+    {
         $prefixedOptionName = $this->prefix($optionName); // how it is stored in DB
         return add_option($prefixedOptionName, $value);
     }
@@ -157,7 +168,8 @@ class GuildNetwork_OptionsManager {
      * @param  $value mixed the new value
      * @return null from delegated call to delete_option()
      */
-    public function updateOption($optionName, $value) {
+    public function updateOption($optionName, $value)
+    {
         $prefixedOptionName = $this->prefix($optionName); // how it is stored in DB
         return update_option($prefixedOptionName, $value);
     }
@@ -172,7 +184,8 @@ class GuildNetwork_OptionsManager {
      * @param  $optionName
      * @return string role name
      */
-    public function getRoleOption($optionName) {
+    public function getRoleOption($optionName)
+    {
         $roleAllowed = $this->getOption($optionName);
         if (!$roleAllowed || $roleAllowed == '') {
             $roleAllowed = 'Administrator';
@@ -186,7 +199,8 @@ class GuildNetwork_OptionsManager {
      * @param  $roleName
      * @return string a WP capability or '' if unknown input role
      */
-    protected function roleToCapability($roleName) {
+    protected function roleToCapability($roleName)
+    {
         switch ($roleName) {
             case 'Super Admin':
                 return 'manage_options';
@@ -210,7 +224,8 @@ class GuildNetwork_OptionsManager {
      * @param $roleName string a standard WP role name like 'Administrator'
      * @return bool
      */
-    public function isUserRoleEqualOrBetterThan($roleName) {
+    public function isUserRoleEqualOrBetterThan($roleName)
+    {
         if ('Anyone' == $roleName) {
             return true;
         }
@@ -222,7 +237,8 @@ class GuildNetwork_OptionsManager {
      * @param  $optionName string name of a Role option (see comments in getRoleOption())
      * @return bool indicates if the user has adequate permissions
      */
-    public function canUserDoRoleOption($optionName) {
+    public function canUserDoRoleOption($optionName)
+    {
         $roleAllowed = $this->getRoleOption($optionName);
         if ('Anyone' == $roleAllowed) {
             return true;
@@ -234,21 +250,23 @@ class GuildNetwork_OptionsManager {
      * see: http://codex.wordpress.org/Creating_Options_Pages
      * @return void
      */
-    public function createSettingsMenu() {
+    public function createSettingsMenu()
+    {
         $pluginName = $this->getPluginDisplayName();
         //create new top-level menu
         add_menu_page($pluginName . ' Plugin Settings',
-                      $pluginName,
-                      'administrator',
-                      get_class($this),
-                      array(&$this, 'settingsPage')
-        /*,plugins_url('/images/icon.png', __FILE__)*/); // if you call 'plugins_url; be sure to "require_once" it
+            $pluginName,
+            'administrator',
+            get_class($this),
+            array(&$this, 'settingsPage')
+            /*,plugins_url('/images/icon.png', __FILE__)*/); // if you call 'plugins_url; be sure to "require_once" it
 
         //call register settings function
         add_action('admin_init', array(&$this, 'registerSettings'));
     }
 
-    public function registerSettings() {
+    public function registerSettings()
+    {
         $settingsGroup = get_class($this) . '-settings-group';
         $optionMetaData = $this->getOptionMetaData();
         foreach ($optionMetaData as $aOptionKey => $aOptionMeta) {
@@ -261,7 +279,8 @@ class GuildNetwork_OptionsManager {
      * Override this method to create a customized page.
      * @return void
      */
-    public function settingsPage() {
+    public function settingsPage()
+    {
         if (!current_user_can('manage_options')) {
             wp_die(__('You do not have sufficient permissions to access this page.', 'guild-network'));
         }
@@ -281,10 +300,12 @@ class GuildNetwork_OptionsManager {
         $settingsGroup = get_class($this) . '-settings-group';
         ?>
         <div class="wrap">
-            <h2><?php echo $this->getPluginDisplayName(); echo ' '; _e('Settings', 'guild-network'); ?></h2>
+            <h2><?php echo $this->getPluginDisplayName();
+        echo ' ';
+        _e('Settings', 'guild-network'); ?></h2>
 
             <form method="post" action="">
-            <?php settings_fields($settingsGroup); ?>
+            <?php settings_fields($settingsGroup);?>
                 <style type="text/css">
                     table.plugin-options-table {padding: 0; border-collapse: collapse;}
                     table.plugin-options-table td {vertical-align: middle; padding: 0 5px;}
@@ -294,44 +315,50 @@ class GuildNetwork_OptionsManager {
                 </style>
                 <table class="plugin-options-table"><tbody>
                 <?php
-                if ($optionMetaData != null) {
-                    foreach ($optionMetaData as $aOptionKey => $aOptionMeta) {
-                        $displayText = is_array($aOptionMeta) ? $aOptionMeta[0] : $aOptionMeta;
-                        ?>
+if ($optionMetaData != null) {
+            foreach ($optionMetaData as $aOptionKey => $aOptionMeta) {
+                $displayText = is_array($aOptionMeta) ? $aOptionMeta[0] : $aOptionMeta;
+                ?>
                             <tr valign="top">
                                 <th scope="row" style="text-align:right;padding-right:5px;"><p><label for="<?php echo $aOptionKey ?>"><?php echo $displayText ?></label></p></th>
                                 <td>
-                                <?php $this->createFormControl($aOptionKey, $aOptionMeta, $this->getOption($aOptionKey)); ?>
+                                <?php $this->createFormControl($aOptionKey, $aOptionMeta, $this->getOption($aOptionKey));?>
                                 </td>
                             </tr>
                         <?php
-                    }
-                }
-                ?>
+}
+        }
+        ?>
                 </tbody></table>
                 <p class="submit">
                     <input type="submit" class="button-primary"
-                           value="<?php _e('Save Changes', 'guild-network') ?>"/>
+                           value="<?php _e('Save Changes', 'guild-network')?>"/>
                 </p>
             </form>
 
             <h3>Instructions</h3>
-            <p>Register your site at <a href="https://guild.network" target="_blank">Guild</a> and get the site code to fill in above.</p>
-            <p>Once your site is approved, the Guild stamp will start showing up on your pages.<p>
-            <h4>Exclusive Content</h4>
-            <p>Designate the posts and/or pages that you want Guild to make exclusive and available only for Guild pass holders.</p>
-            <p>When editing the post or page in WordPress, add the "Guild Exclusive" category, or add a "guild-exclusive" tag.  The plugin
-            will take care of hiding this content according to whether the visitor has an access pass or not.</p>
-            <p>If you would like to use a different name for the category and/or tag that the plugin will use to identify exclusive content,
-            you can change the corresponding settings above.</p>
-            <p>By default, the plugin will only hide post contents when the post is displayed on a page by itself.  In some themes, you may
-            want to change the "Exclusive posts" setting above to protect it everywhere.</p>
-            <h4>Advertising</h4>
-            <p>This plugin will take care of removing ads from your site for visitors with an access pass.  Most advertising networks are
-            handled automatically.  However, be sure to check settings on your site's page at guild.network.</p>
+            <p>This plugin works in conjunction with Guild's cloud service.  Submit your site at <a href="http://guild.network">guild.network</a> to get your site code.</p>
+            <p>Once the plugin is activated and configured with a valid site code, it will register new widgets and shortcodes.  This provides an easy way to position Guild widgets in many places on your pages.</p>
+            <p>In cases where your theme does not provide slots for the places where you'd like to position the Guild widgets (e.g., placing the filmstrip just below the banner), you can use the CSS Selector settings above to position a widget near an existing tag on your page.</p>
+            <p>Guild widgets are designed to integrate seamlessly into your site.  Configure styles at Appearance / Customize / Additional CSS.  Use normal CSS styles to affect how the widgets are positioned on the page.  Guild uses custom properties to allow you to affect styling that is internal to each widget.</p>
+            <p>Following are the custom CSS properties that can be assigned on our widgets:
+              <ul>
+                  <li>--guild-card-font</li>
+                  <li>--guild-tile-font</li>
+                  <li>--guild-tile-color</li>
+                  <li>--guild-tile-highlight-color</li>
+                  <li>--guild-tile-text-color</li>
+                  <li>--guild-tile-highlight-text-color</li>
+                  <li>--guild-border-color</li>
+                  <li>--guild-slider-color</li>
+                  <li>--guild-slider-cursor-color</li>
+                  <li>--guild-icon-color</li>
+              </ul>
+            </p>
+            <p>If you have any problems installing, configuring, or styling your widgets, please <a href="mailto:support@guild.network">contact us</a>.  We're happy to help!</p>
         </div>
         <?php
-    }
+}
 
     /**
      * Helper-function outputs the correct form element (input tag, select tag) for the given item
@@ -340,24 +367,24 @@ class GuildNetwork_OptionsManager {
      * @param  $savedOptionValue string current value for $aOptionKey
      * @return void
      */
-    protected function createFormControl($aOptionKey, $aOptionMeta, $savedOptionValue) {
-      if (is_array($aOptionMeta) && count($aOptionMeta) > 2) { // Drop-down list
-        $choices = array_slice($aOptionMeta, 1);
+    protected function createFormControl($aOptionKey, $aOptionMeta, $savedOptionValue)
+    {
+        if (is_array($aOptionMeta) && count($aOptionMeta) > 2) { // Drop-down list
+            $choices = array_slice($aOptionMeta, 1);
             ?>
             <p><select name="<?php echo $aOptionKey ?>" id="<?php echo $aOptionKey ?>">
             <?php
-                            foreach ($choices as $aChoice) {
+foreach ($choices as $aChoice) {
                 $selected = ($aChoice == $savedOptionValue) ? 'selected' : '';
                 ?>
                     <option value="<?php echo $aChoice ?>" <?php echo $selected ?>><?php echo $this->getOptionValueI18nString($aChoice) ?></option>
                 <?php
-            }
+}
             ?>
             </select></p>
             <?php
 
-        }
-        else { // Simple input field
+        } else { // Simple input field
             ?>
             <p><input type="text" name="<?php echo $aOptionKey ?>" id="<?php echo $aOptionKey ?>"
                       value="<?php echo esc_attr($savedOptionValue) ?>" size="50" style="max-width: 200px;"/></p>
@@ -380,7 +407,8 @@ class GuildNetwork_OptionsManager {
      * @param  $optionValue string
      * @return string __($optionValue) if it is listed in this method, otherwise just returns $optionValue
      */
-    protected function getOptionValueI18nString($optionValue) {
+    protected function getOptionValueI18nString($optionValue)
+    {
         switch ($optionValue) {
             case 'true':
                 return __('true', 'guild-network');
@@ -407,11 +435,12 @@ class GuildNetwork_OptionsManager {
      * Query MySQL DB for its version
      * @return string|false
      */
-    protected function getMySqlVersion() {
+    protected function getMySqlVersion()
+    {
         global $wpdb;
         $rows = $wpdb->get_results('select version() as mysqlversion');
         if (!empty($rows)) {
-             return $rows[0]->mysqlversion;
+            return $rows[0]->mysqlversion;
         }
         return false;
     }
@@ -424,7 +453,8 @@ class GuildNetwork_OptionsManager {
      * from "wordpress@your-site.com"
      * @return string domain name
      */
-    public function getEmailDomain() {
+    public function getEmailDomain()
+    {
         // Get the site domain and get rid of www.
         $sitename = strtolower($_SERVER['SERVER_NAME']);
         if (substr($sitename, 0, 4) == 'www.') {
@@ -433,4 +463,3 @@ class GuildNetwork_OptionsManager {
         return $sitename;
     }
 }
-
