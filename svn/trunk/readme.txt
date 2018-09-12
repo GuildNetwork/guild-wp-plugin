@@ -33,6 +33,11 @@ To learn more, visit [Guild](https://guild.network).
 
 == Screenshots ==
 
+1. A sample website showing the Filmstrip widget added just below the banner
+2. The filmstrip widget by itself.  Scroll horizontally through EVERY page in the site.
+3. The explorer widget as it might appear in a sidebar.  Use the treemap to explore pages by topics and keywords.
+4. The explorer widget is responsive and will switch to landscape if the width is sufficient.
+
 == Changelog ==
 
 = 0.2.1 =
