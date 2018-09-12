@@ -5,7 +5,7 @@ Tags:
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 4.0
-Tested up to: 4.9.7
+Tested up to: 4.9.8
 Stable tag: 0.3.0
 
 Increase engagement on your site using [Guild](https://guild.network) widgets on your page.  We increase pageviews per visit.
